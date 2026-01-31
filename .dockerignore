@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Frontend (không cần trong container backend)
+frontend/
+docker-compose.yml
+
+# Backend - Dependencies
+backend/vendor/
+backend/node_modules/
+
+# Backend - Build artifacts
+backend/.env
+backend/.env.*
+
+# Backend - Cache và logs
+backend/storage/logs/*
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/bootstrap/cache/*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+backend/tests/
+backend/phpunit.xml
+
+# Documentation
+*.md
+CHANGELOG.md

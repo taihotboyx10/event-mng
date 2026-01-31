@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./:/var/www/html
+      - ./backend:/var/www/html
       - storage_data:/var/www/html/storage
       - cache_data:/var/www/html/bootstrap/cache
       - ./docker/nginx.conf:/etc/nginx/sites-available/default
@@ -60,7 +60,7 @@ services:
     environment:
       - VITE_DEV_SERVER_URL=http://localhost:5173
     volumes:
-      - .:/app
+      - ./frontend:/app
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
     networks:
       - event_network

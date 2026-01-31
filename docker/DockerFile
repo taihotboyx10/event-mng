@@ -39,13 +39,23 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 # Supervisord設定ファイルのコピー
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# アプリケーションファイルをコピー
-COPY . /var/www/html
+# アプリケーションファイルをコピー（backendフォルダのみ）
+COPY ./backend /var/www/html
+
+# 必要なディレクトリを作成
+RUN mkdir -p /var/www/html/storage/framework/cache/data \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/logs \
+    && mkdir -p /var/www/html/bootstrap/cache
 
 # パーミッション設定
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
+
+# Gitの安全性設定（Composer用）
+RUN git config --global --add safe.directory /var/www/html
 
 # Composerの依存関係をインストール
 RUN composer install --no-dev --optimize-autoloader --no-interaction
