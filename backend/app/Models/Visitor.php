@@ -10,9 +10,10 @@ class Visitor extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'email',
         'visitor_type',
-        'steakholder_type',
+        'stakeholder_type',
         'business_type',
         'family_name',
         'given_name',
@@ -33,8 +34,8 @@ class Visitor extends Model
         'referral_code',
         'bee_attendance_type',
         'issues',
-        'companition_adult_count',
-        'companition_child_count',
+        'companion_adult_count',
+        'companion_child_count',
     ];
 
     public function user()
