@@ -1,0 +1,181 @@
+# PHP & Laravel Coding Convention
+1. General Rules
+- Follow PSR-12 coding style.
+- Use meaningful and descriptive names for variables, methods, and classes.
+- Avoid magic numbers; use constants instead.
+- Keep functions small and focused on a single responsibility.
+
+2. Naming Convention
+2.1 Class Name
+Use PascalCase.
+Example:
+```php
+class UserController
+class OrderService
+class ProductRepository
+
+2.2 Method Name
+Use camelCase.
+Example:
+getUserList()
+createOrder()
+updateCustomerProfile()
+
+2.3 Variable Name
+Use camelCase.
+Example:
+$userList
+$orderTotal
+$customerAddress
+
+2.4 Constant
+Use UPPER_CASE.
+Example:
+const MAX_LOGIN_ATTEMPTS = 5;
+
+2.5 Database Table
+Use snake_case and plural form.
+Example:
+users
+order_items
+customer_addresses
+
+2.6 Column Name
+Use snake_case.
+Example:
+created_at
+updated_at
+customer_name
+order_total
+
+3. Laravel Structure Convention
+3.1 Controller
+Keep controllers thin.
+Business logic must be placed in Service classes.
+Example:
+app/Http/Controllers
+Example class:
+UserController
+OrderController
+AuthController
+
+3.2 Request Validation
+Use Form Request for validation.
+Example:
+php artisan make:request StoreUserRequest
+Location:
+app/Http/Requests
+Example:
+StoreUserRequest
+UpdateUserRequest
+
+3.3 Service Layer
+Business logic should be placed in Services.
+Example folder:
+app/Services
+Example classes:
+UserService
+OrderService
+PaymentService
+
+3.4 Repository Layer (Optional)
+For complex database logic.
+Example folder:
+app/Repositories
+Example classes:
+UserRepository
+OrderRepository
+
+4. Route Convention
+4.1 RESTful Routes
+Use RESTful naming.
+Example:
+GET    /users
+GET    /users/{id}
+POST   /users
+PUT    /users/{id}
+DELETE /users/{id}
+
+5. API Response Format
+Standard API response format:
+{
+  "success": true,
+  "data": {},
+  "message": "Success"
+}
+
+Error response:
+{
+  "success": false,
+  "message": "Validation error",
+  "errors": {}
+}
+
+6. Migration Convention
+Table names must be plural.
+Example migration:
+create_users_table
+create_orders_table
+create_order_items_table
+
+7. Environment Variables
+Use .env for environment configuration.
+Example:
+APP_NAME=MyApp
+APP_ENV=local
+APP_DEBUG=true
+DB_CONNECTION=mysql
+Never commit .env file to Git.
+
+8. Code Formatting
+Use automatic formatter.
+Recommended tools:
+Laravel Pint
+PHP CS Fixer
+Example:
+./vendor/bin/pint
+
+9. Git Commit Convention
+Use clear commit messages.
+Example:
+feat: add user login API
+fix: correct order calculation
+refactor: improve user service logic
+
+10. Security Rules
+Never trust user input.
+Always validate request data.
+Use Laravel built-in protection:
+Examples:
+CSRF protection
+XSS protection
+SQL injection protection via Eloquent or Query Builder.
+
+11. Performance Guidelines
+Use eager loading to avoid N+1 problem.
+Example:
+User::with('orders')->get();
+Avoid querying inside loops.
+
+12. File Upload Convention
+Uploaded files must be stored in:
+storage/app/public
+Access via:
+php artisan storage:link
+
+13. Logging
+Use Laravel logging instead of echo or var_dump.
+Example:
+Log::info('User login success', ['user_id' => $user->id]);
+
+14. Documentation
+All APIs must be documented.
+Recommended tools:
+Swagger
+Postman Collection
+
+15. Code Review Rules
+Before merging code:
+Code must pass lint.
+No debug code (dd, dump, var_dump).
+Follow naming conventions.

@@ -8,6 +8,7 @@ WORKDIR /var/www/html
 
 # システムパッケージとPHP拡張機能のインストール
 RUN apt-get update && apt-get install -y \
+    bash \
     git \
     curl \
     libpng-dev \
